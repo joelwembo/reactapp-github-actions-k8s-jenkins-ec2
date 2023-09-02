@@ -127,9 +127,23 @@ Requirement
 7. kubectl apply -f deployment.yaml
 8. kubectl apply -f load-balancer.yaml
 9. kubectl get services -w
-9. minikube ip
+9. minikube deployment
+     - minikube service reactprodx -n  reactprodx
+    
+
+NAMESPACE  |    NAME    | TARGET PORT |            URL            |
+|------------|------------|-------------|---------------------------|
+| reactprodx | reactprodx |        8080 | http://192.168.49.2:31000 |
+NAMESPACE  |    NAME    | TARGET PORT |          URL           |
+|------------|------------|-------------|------------------------|
+| reactprodx | reactprodx |             | http://127.0.0.1:55110 |
+
 10. kubectl scale deployment reactprodx --replicas=3
 
+11. Check Services and running pods
+   - kubectl get pods
+   - kubectl get nodes
+   - 
 
 # Important Commands
 minikube ip
