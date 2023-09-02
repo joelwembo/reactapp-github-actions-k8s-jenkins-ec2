@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  reactservertypescript:
+    container_name: reactprodx
+    image: reactprodx:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.reactprodx.rule=Host(`prod-app-ether.co`)"
+      - "traefik.http.routers.reactprodx.entrypoints=websecure"
+      - "traefik.http.routers.reactprodx.tls.certresolver=myresolver"
+      - "traefik.http.services.reactprodx.loadbalancer.server.port=3000"
+    ports:
+      - "3000:3000"
+    restart: always
+    networks:
+      - traefik_default
+networks:
+  traefik_default:
+    external: true

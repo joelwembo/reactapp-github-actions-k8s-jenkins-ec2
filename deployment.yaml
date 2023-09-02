@@ -1,0 +1,27 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: reactprodx-nginx-deployment
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: reactprodx
+  template:
+    metadata:
+      labels:
+        app: reactprodx
+    spec:
+      containers:
+      - name: reactprodx
+        image: reactprodx
+        resources:
+            limits:
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 200Mi
+        ports:
+        - containerPort: 80
