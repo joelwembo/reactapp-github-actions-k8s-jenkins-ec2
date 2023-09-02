@@ -12,12 +12,13 @@ spec:
       labels:
         app: reactprodx
     spec:
+      restartPolicy: Always
       containers:
       - name: reactprodx
-        image: joelwembo/reactprodx:latest
-        imagePullPolicy: Always
+        image: 18.141.186.159/joelwembo/reactprodx:latest
+        # imagePullPolicy: Always
         ports:
-            - containerPort: 80
+          - containerPort: 80
         # readinessProbe:
         #   httpGet:
         #     path: /
@@ -27,7 +28,7 @@ spec:
         resources:
             limits:
               memory: 200Mi
-              cpu: 50m
+              cpu: 500m
             requests:
-              cpu: 30m
+              cpu: 300m
               memory: 200Mi  

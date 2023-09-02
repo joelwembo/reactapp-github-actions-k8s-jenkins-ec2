@@ -171,3 +171,4 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 
 # Important Commands
 minikube ip
+docker run -d -p 5000:5000 --name reactwebapp1 joelwembo/reactprodx
