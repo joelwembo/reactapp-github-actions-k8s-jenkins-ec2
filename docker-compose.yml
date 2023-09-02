@@ -1,8 +1,8 @@
-version: "3.8"
+version: "3.9"
 services:
-    reactprodx:
+    webreactprodx:
         container_name: reactprodx
-        image: reactprodxt:latest
+        image: joelwembo/reactprodxt:latest
         restart: always
         build:
             context: .

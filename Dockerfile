@@ -2,18 +2,18 @@ FROM node:18-alpine AS prod
 # set working directory
 WORKDIR /app
 COPY package*.json ./
-COPY build ./
+# COPY build ./
 COPY .env ./
 COPY tsconfig.json ./
-# RUN npm install --legacy-peer-deps
-RUN npm ci
+RUN npm install --legacy-peer-deps
+# RUN npm ci
 # For reverse proxy settings
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY . .
 # Build Stage
 # RUN npm test - if you want to test before to build
 # We are going to run build on Jenkinsfile
-# RUN npm run build
+RUN npm run build
 # Step 2: Serve the React app using Nginx
 FROM nginx:alpine AS prod2
 
@@ -25,7 +25,7 @@ EXPOSE 3000
 EXPOSE 4000
 # run nginx with global directives and daemon off
 EXPOSE 80
-CMD ["npm", "start"] 
+# CMD ["npm", "start"] 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 # DOCKER_SCAN_SUGGEST=false docker build -t reactprodx .
 # docker run -p 80:80 --name react reactprodx

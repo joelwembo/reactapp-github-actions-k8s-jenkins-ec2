@@ -44,3 +44,46 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+# app ether main
+npm install
+npm start
+
+# Using docker
+1. DOCKER_SCAN_SUGGEST=false docker build -t reactprodx .
+
+For building an image to be push to dockerhub
+DOCKER_SCAN_SUGGEST=false docker build -t joelwembo/reactprodx:latest .
+
+push docker image to dockerhub
+
+2. docker push joelwembo/reactprodx:latest
+3. docker run -p 80:80 --name react reactprodx  
+OR
+docker run -d -p 3000:80 reactprodx
+
+# Kubernetes
+
+1. DOCKER_SCAN_SUGGEST=false docker build -t reactprodx .
+2. docker run -d -p 80:80 --name react reactprodx   OR  docker run -d -p 3000:80 reactprodx
+3. docker push joelwembo/reactprodx:latest
+4. minikube start --driver=docker
+5. kubectl create namespace reactprodx-nginx-deployment
+6. kubectl config set-context --current --namespace=reactprodx-nginx-deployment
+7. kubectl apply -f deployment.yaml
+8. kubectl apply -f load-balancer.yaml
+9. kubectl get services -w
+9. minikube ip
+10. kubectl scale deployment react-docker --replicas=10
+
+# cleanup
+docker container rm reactprodx
+OR
+docker image rm reactprodx:latest
+
+
+
+# Jenkins
+
+docker run  -p 3000:80 reactprodx
