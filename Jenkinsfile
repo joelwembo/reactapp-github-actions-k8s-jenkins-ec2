@@ -37,6 +37,7 @@ pipeline {
             steps{
                 // sh 'docker stop $(docker ps | grep "joelwembo/reactprodx:latest" | cut -d " " -f 1)'
                 // sh 'docker rmi -f reactprodx joelwembo/reactprodx:latest'
+                sh 'docker-compose down'
                 sh 'docker build -t joelwembo/reactprodx:latest  --no-cache .'
             }
         }
