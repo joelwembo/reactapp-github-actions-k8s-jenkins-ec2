@@ -156,8 +156,8 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 
 # Kubernetes
 
-1. DOCKER_SCAN_SUGGEST=false docker build -t reactprodx .
-2. docker run -d -p 80:80 --name react reactprodx   OR  docker run -d -p 3000:80 reactprodx
+1. DOCKER_SCAN_SUGGEST=false docker build -t joelwembo/reactprodx:latest .
+2. docker run -d -p 80:80 --name reactwebapp joelwembo/reactprodx   OR  docker run -d -p 80:80 reactprodx
 3. docker push joelwembo/reactprodx:latest
 4. minikube start --driver=docker --force
 5. kubectl create namespace reactprodx
@@ -166,7 +166,7 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 8. kubectl apply -f load-balancer.yaml
 9. kubectl get services -w
 9. minikube ip
-10. kubectl scale deployment react-docker --replicas=10
+10. kubectl scale deployment reactprodx --replicas=3
 
 
 # Important Commands
