@@ -168,4 +168,20 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 - Step 6
 
 # Setup Jenkins Multibranch Pipeline
+![Configure-nodejs-tools](https://github.com/joelwembo/reactprodx-k8s-jenkins/assets/19718580/6b6a3f58-8ec2-4038-a155-91b46b638804)
 
+![Install-node-docker-plugins](https://github.com/joelwembo/reactprodx-k8s-jenkins/assets/19718580/baf81351-1900-4982-802b-3e5b36ae8772)
+
+![pluginsinstallations](https://github.com/joelwembo/reactprodx-k8s-jenkins/assets/19718580/4d3cc671-5f29-4d9b-833b-e20639fa8f3e)
+
+![Screenshot 2023-09-02 195223](https://github.com/joelwembo/reactprodx-k8s-jenkins/assets/19718580/217d5893-19cd-415c-a647-4963788f754a)
+
+
+![Screenshot 2023-09-02 195411](https://github.com/joelwembo/reactprodx-k8s-jenkins/assets/19718580/d3386eb5-45bd-4678-b39d-5c81cb61879b)
+
+
+![Screenshot 2023-09-02 200229](https://github.com/joelwembo/reactprodx-k8s-jenkins/assets/19718580/6aca64a2-c5bb-4605-afe2-80b35258890a)
+
+
+![Screenshot 2023-09-02 203047](https://github.com/joelwembo/reactprodx-k8s-jenkins/assets/19718580/b4e36a92-74a8-4b3b-a119-c05a456be550)
+![Screenshot 2023-09-02 200555](https://github.com/joelwembo/reactprodx-k8s-jenkins/assets/19718580/46ed4a0c-891e-4eec-8c22-0d21ba62a80d)
