@@ -160,8 +160,8 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 2. docker run -d -p 80:80 --name react reactprodx   OR  docker run -d -p 3000:80 reactprodx
 3. docker push joelwembo/reactprodx:latest
 4. minikube start --driver=docker --force
-5. kubectl create namespace reactprodx-nginx-deployment
-6. kubectl config set-context --current --namespace=reactprodx-nginx-deployment
+5. kubectl create namespace reactprodx
+6. kubectl config set-context --current --namespace=reactprodx
 7. kubectl apply -f deployment.yaml
 8. kubectl apply -f load-balancer.yaml
 9. kubectl get services -w
