@@ -27,5 +27,4 @@ EXPOSE 4000
 EXPOSE 80
 # CMD ["npm", "start"] 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
-# DOCKER_SCAN_SUGGEST=false docker build -t reactprodx .
-# docker run -p 80:80 --name react reactprodx
+
