@@ -57,6 +57,7 @@ pipeline {
         }
         stage('Deploy'){
             steps{
+                sh "docker-compose down"
                 sh "docker-compose up -d"
                 sh 'docker image ls'
                 sh 'docker images --filter "reference=reactprodx*"'         
