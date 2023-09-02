@@ -65,6 +65,12 @@ pipeline {
             }
         }
 
-        
+        stage('Send Email to admin'){
+            steps{
+                emailext(attachLog: true, body: 'HelloEmIl body', subject: 'This is Nodejs Test subject', to: 'joelwembo@outlook.ph')      
+            }
+        }
+
+     
     }
 }

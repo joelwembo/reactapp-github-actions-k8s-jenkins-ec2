@@ -85,22 +85,6 @@ ec2instance = "18.141.186.159"
 
  ssh -i "ProctKeyPair.pem" ubuntu@ec2-18-141-186-159.ap-southeast-1.compute.amazonaws.com
 
-
-
-# Kubernetes
-
-1. DOCKER_SCAN_SUGGEST=false docker build -t reactprodx .
-2. docker run -d -p 80:80 --name react reactprodx   OR  docker run -d -p 3000:80 reactprodx
-3. docker push joelwembo/reactprodx:latest
-4. minikube start --driver=docker
-5. kubectl create namespace reactprodx-nginx-deployment
-6. kubectl config set-context --current --namespace=reactprodx-nginx-deployment
-7. kubectl apply -f deployment.yaml
-8. kubectl apply -f load-balancer.yaml
-9. kubectl get services -w
-9. minikube ip
-10. kubectl scale deployment react-docker --replicas=10
-
 # cleanup
 docker container rm reactprodx
 OR
@@ -186,3 +170,22 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 ![Screenshot 2023-09-02 200555](https://github.com/joelwembo/reactprodx-k8s-jenkins/assets/19718580/46ed4a0c-891e-4eec-8c22-0d21ba62a80d)
 
 ![Screenshot 2023-09-02 203047](https://github.com/joelwembo/reactprodx-k8s-jenkins/assets/19718580/b4e36a92-74a8-4b3b-a119-c05a456be550)
+
+
+# Kubernetes
+
+1. DOCKER_SCAN_SUGGEST=false docker build -t reactprodx .
+2. docker run -d -p 80:80 --name react reactprodx   OR  docker run -d -p 3000:80 reactprodx
+3. docker push joelwembo/reactprodx:latest
+4. minikube start --driver=docker --force
+5. kubectl create namespace reactprodx-nginx-deployment
+6. kubectl config set-context --current --namespace=reactprodx-nginx-deployment
+7. kubectl apply -f deployment.yaml
+8. kubectl apply -f load-balancer.yaml
+9. kubectl get services -w
+9. minikube ip
+10. kubectl scale deployment react-docker --replicas=10
+
+
+# Important Commands
+minikube ip
