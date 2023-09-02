@@ -9,6 +9,13 @@ pipeline {
 
     tools { nodejs "NodeJS"}  
     stages{
+
+        stage('Notify'){
+            steps{
+                emailext(attachLog: true, body: 'HelloEmIl body', subject: 'This is Nodejs Test subject', to: 'joelwembo@outlook.ph')      
+            }
+        }
+
          stage('Environment') {
           steps{
             sh 'git --version'
@@ -65,7 +72,7 @@ pipeline {
             }
         }
 
-        stage('Send Email to admin'){
+        stage('SendEmail'){
             steps{
                 emailext(attachLog: true, body: 'HelloEmIl body', subject: 'This is Nodejs Test subject', to: 'joelwembo@outlook.ph')      
             }
