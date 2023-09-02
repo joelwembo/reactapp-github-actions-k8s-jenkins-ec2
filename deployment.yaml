@@ -15,7 +15,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: reactprodx
-        image: 18.141.186.159/joelwembo/reactprodx:latest
+        image: joelwembo/reactprodx:latest
         # imagePullPolicy: Always
         ports:
           - containerPort: 80
@@ -32,3 +32,22 @@ spec:
             requests:
               cpu: 300m
               memory: 200Mi  
+---
+# Load Balancer
+apiVersion: v1
+kind: Service
+metadata:  
+  name: reactprodx
+spec:
+  externalIPs:
+  - 18.141.186.159
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 80
+    nodePort: 31000
+  selector:
+    app: reactprodx
+  type: LoadBalancer
+status:
+  loadBalancer: {}              

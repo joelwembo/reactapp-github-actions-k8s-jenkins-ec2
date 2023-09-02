@@ -157,7 +157,7 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 # Kubernetes
 
 1. DOCKER_SCAN_SUGGEST=false docker build -t joelwembo/reactprodx:latest .
-2. docker run -d -p 80:80 --name reactwebapp joelwembo/reactprodx   OR  docker run -d -p 80:80 reactprodx
+2. docker run -d -p 80:80 --name reactwebapp2 joelwembo/reactprodx   OR  docker run -d -p 80:80 reactprodx
 3. docker push joelwembo/reactprodx:latest
 4. minikube start --driver=docker --force
 5. kubectl create namespace reactprodx
