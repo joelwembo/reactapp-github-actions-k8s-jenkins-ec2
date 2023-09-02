@@ -153,8 +153,18 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 
 - Step 4 
 
-Navigate to Manage Jenkins and install Nodejs and Docker required plugins
+- Navigate to Manage Jenkins and install Nodejs and Docker required plugins
+
+- Navigate to Manage Jenkins and Configure Nodes and Docker tools 
+  choose node 18.9.1 and add docker main registry and your docker ip
+
 
 - Step 5
+
+- Setup Github credentials globally
+- Setup aws token
+- setup webhook on github : http://18.141.186.159:8181/github-webhook/
+
+- Step 6
 
 Setup Jenkins Multibranch Pipeline
