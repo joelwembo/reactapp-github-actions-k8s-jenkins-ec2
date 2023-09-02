@@ -183,5 +183,6 @@ cat /var/lib/jenkins/secrets/initialAdminPassword
 ![Screenshot 2023-09-02 200229](https://github.com/joelwembo/reactprodx-k8s-jenkins/assets/19718580/6aca64a2-c5bb-4605-afe2-80b35258890a)
 
 
-![Screenshot 2023-09-02 203047](https://github.com/joelwembo/reactprodx-k8s-jenkins/assets/19718580/b4e36a92-74a8-4b3b-a119-c05a456be550)
 ![Screenshot 2023-09-02 200555](https://github.com/joelwembo/reactprodx-k8s-jenkins/assets/19718580/46ed4a0c-891e-4eec-8c22-0d21ba62a80d)
+
+![Screenshot 2023-09-02 203047](https://github.com/joelwembo/reactprodx-k8s-jenkins/assets/19718580/b4e36a92-74a8-4b3b-a119-c05a456be550)
