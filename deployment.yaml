@@ -1,7 +1,7 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: reactprodx-nginx-deployment
+  name: reactprodx
 spec:
   replicas: 4
   strategy:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: reactprodx
-        image: reactprodx
+        image: joelwembo/reactprodx:latest
         resources:
             limits:
               memory: 200Mi
