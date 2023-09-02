@@ -23,6 +23,11 @@ COPY --from=prod /app/build .
 
 EXPOSE 3000
 EXPOSE 4000
+
+RUN usermod -a -G docker jenkins
+RUN usermod -a -G docker argocd
+RUN usermod -a -G docker kubectl
+
 # run nginx with global directives and daemon off
 EXPOSE 80
 # CMD ["npm", "start"] 
