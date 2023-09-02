@@ -63,6 +63,30 @@ push docker image to dockerhub
 OR
 docker run -d -p 3000:80 reactprodx
 
+
+# Terraform Provisionning
+
+aws_instance.project-iac (remote-exec): commit: fd7ecd9c4599bef9f04c0986c4a0187f98a4396e
+aws_instance.project-iac (remote-exec): Minikube Installed successfully installer
+aws_instance.project-iac (remote-exec):   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+aws_instance.project-iac (remote-exec):                                  Dload  Upload   Total   Spent    Left  Speed
+aws_instance.project-iac (remote-exec):   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+aws_instance.project-iac (remote-exec):   1 44.4M    1  552k    0     0   595k      0  0:01:16 --:--:--  0:01:16  594k
+aws_instance.project-iac (remote-exec):  35 44.4M   35 15.8M    0     0  8442k      0  0:00:05  0:00:01  0:00:04 8438k
+aws_instance.project-iac: Still creating... [5m20s elapsed]
+aws_instance.project-iac (remote-exec):  81 44.4M   81 36.3M    0     0  12.4M      0  0:00:03  0:00:02  0:00:01 12.4M
+aws_instance.project-iac (remote-exec): 100 44.4M  100 44.4M    0     0  13.1M      0  0:00:03  0:00:03 --:--:-- 13.1M
+aws_instance.project-iac (remote-exec): Kubeclt Installed successfully installer
+aws_instance.project-iac: Creation complete after 5m22s [id=i-0c8c9dd49e22b82e4]
+
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+Outputs:
+ec2instance = "18.141.186.159"
+
+ ssh -i "ProctKeyPair.pem" ubuntu@ec2-18-141-186-159.ap-southeast-1.compute.amazonaws.com
+
+
+
 # Kubernetes
 
 1. DOCKER_SCAN_SUGGEST=false docker build -t reactprodx .
@@ -82,8 +106,55 @@ docker container rm reactprodx
 OR
 docker image rm reactprodx:latest
 
-
-
 # Jenkins
 
-docker run  -p 3000:80 reactprodx
+Step 1
+
+
+# Jenkins installations
+sudo apt-get install debian-keyring debian-archive-keyring --assume-yes
+sudo apt-key update
+sudo apt-get update
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5BA31D57EF5975CA
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
+sudo apt update
+sudo apt install openjdk-11-jre-headless --assume-yes
+sudo java -version
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins --assume-yes
+
+- Step 1
+First open the /etc/default/jenkins file.
+Then under JENKINS_ARGS section, you can change the port like this HTTP_PORT=8181.
+
+Then you should restart Jenkins with sudo service jenkins restart.
+
+Then to check the status use this command sudo systemctl status jenkins
+
+- Step 2
+
+vim /usr/lib/systemd/system/jenkins.service
+
+change the port in the line
+
+Environment="JENKINS_PORT=8181"
+
+systemctl daemon-reload
+systemctl restart jenkins.service
+
+- Step 3
+
+Navigate to http://18.141.186.159:8181/login?from=%2F
+
+cat /var/lib/jenkins/secrets/initialAdminPassword
+
+- Step 4 
+
+Navigate to Manage Jenkins and install Nodejs and Docker required plugins
+
+- Step 5
+
+Setup Jenkins Multibranch Pipeline
