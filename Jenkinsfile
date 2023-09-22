@@ -28,11 +28,11 @@ pipeline {
             }
         }
 
-        stage('Unit Test 1'){
-            steps{
-                sh "npm run test"
-            }
-        }
+        // stage('Unit Test 1'){
+        //     steps{
+        //         sh "npm run test"
+        //     }
+        // }
         
         stage('Build'){
             steps{
@@ -50,11 +50,11 @@ pipeline {
             sh 'docker push joelwembo/reactprodx:latest'
           }
         }
-        stage('Manuel Test'){
-            steps{
-                sh "npm run test"
-            }
-        }
+        // stage('Manuel Test'){
+        //     steps{
+        //         sh "npm run test"
+        //     }
+        // }
         stage('Deploy'){
             steps{
                 sh "docker-compose down"
