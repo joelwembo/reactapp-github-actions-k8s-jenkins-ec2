@@ -66,21 +66,21 @@ pipeline {
             }
         }
 
-        stage('Deploy to AKS') {
-          steps {
-            sh 'minikube ip'
-            sh 'kubectl cluster-info'
-            dir('deployments') {
-              sh 'kubectl delete namespace reactprodx'
-              sh 'kubectl create namespace reactprodx'
-              sh 'kubectl config set-context --current --namespace=reactprodx'
-              sh 'kubectl apply -f deployment.yaml'
-            }    
-            sh 'kubectl get services && kubectl get pods'
-            sh 'minikube service reactprodx -n  reactprodx &'
-            sh 'exit 0'
-      }
-    }
+    //     stage('Deploy to AKS') {
+    //       steps {
+    //         sh 'minikube ip'
+    //         sh 'kubectl cluster-info'
+    //         dir('deployments') {
+    //           sh 'kubectl delete namespace reactprodx'
+    //           sh 'kubectl create namespace reactprodx'
+    //           sh 'kubectl config set-context --current --namespace=reactprodx'
+    //           sh 'kubectl apply -f deployment.yaml'
+    //         }    
+    //         sh 'kubectl get services && kubectl get pods'
+    //         sh 'minikube service reactprodx -n  reactprodx &'
+    //         sh 'exit 0'
+    //   }
+    // }
 
         // stage('SendEmail'){
         //     steps{
