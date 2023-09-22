@@ -24,13 +24,12 @@ pipeline {
         stage('Dependencies') {
             steps{
             sh 'npm install --legacy-peer-deps'
-            sh 'sudo chmod 777 ./deployments/installer.sh'
-              dir('deployments') {
-                sh "installer.sh || exit 0"
-              } 
+            // sh 'chmod 777 ./deployments/installer.sh'
+            //   dir('deployments') {
+            //     sh "installer.sh || exit 0"
+            //   } 
             }
         }
-
         // stage('Unit Test 1'){
         //     steps{
         //         sh "npm run test"
