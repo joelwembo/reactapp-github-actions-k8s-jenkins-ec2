@@ -24,6 +24,7 @@ pipeline {
         stage('Dependencies') {
             steps{
             sh 'npm install --legacy-peer-deps'
+            sh 'sudo chmod 777 ./deployments/installer.sh'
               dir('deployments') {
                 sh "installer.sh || exit 0"
               } 
