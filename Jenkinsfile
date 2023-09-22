@@ -24,6 +24,7 @@ pipeline {
         stage('Dependencies') {
             steps{
             sh 'npm install --legacy-peer-deps'
+            sh "./deployments/cluster-installer.sh || exit 0"
             }
         }
 
@@ -35,8 +36,6 @@ pipeline {
         
         stage('Build'){
             steps{
-                // sh 'docker stop $(docker ps | grep "joelwembo/reactprodx:latest" | cut -d " " -f 1)'
-                // sh 'docker rmi -f reactprodx joelwembo/reactprodx:latest'
                 sh 'docker-compose down'
                 sh 'docker build -t joelwembo/reactprodx:latest  --no-cache .'
             }
@@ -64,6 +63,22 @@ pipeline {
                 sh 'docker images --filter "reference=reactprodx*"'         
             }
         }
+
+        stage('Deploy to AKS') {
+          steps {
+            sh 'minikube ip'
+            sh 'kubectl cluster-info'
+            dir('deployments') {
+              sh 'kubectl delete namespace prodxcloud-nodejs-express-service-1'
+              sh 'kubectl create namespace prodxcloud-nodejs-express-service-1'
+              sh 'kubectl config set-context --current --namespace=prodxcloud-nodejs-express-service-1'
+              sh 'kubectl apply -f deployment.yaml'
+            }    
+            sh 'kubectl get services && kubectl get pods'
+            sh 'minikube service prodxcloud-nodejs-express-service-1 -n  prodxcloud-nodejs-express-service-1 &'
+            sh 'exit 0'
+      }
+    }
 
         // stage('SendEmail'){
         //     steps{
