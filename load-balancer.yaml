@@ -4,7 +4,7 @@ metadata:
   name: reactprodx
 spec:
   externalIPs:
-  - 18.141.186.159
+  - 139.162.39.79
   ports:
   - port: 8080
     protocol: TCP
