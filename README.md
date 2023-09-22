@@ -165,3 +165,17 @@ NAMESPACE  |    NAME    | TARGET PORT |          URL           |
 # Important Commands
 minikube ip
 docker run -d -p 5000:5000 --name reactwebapp1 joelwembo/reactprodx
+
+# Vagrant
+
+
+# Prometheus
+
+
+# Grafana
+
+
+# Elastic Search
+
+# Slack / Jira Connection
+

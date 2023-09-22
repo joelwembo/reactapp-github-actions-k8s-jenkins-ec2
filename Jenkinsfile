@@ -24,7 +24,7 @@ pipeline {
         stage('Dependencies') {
             steps{
             sh 'npm install --legacy-peer-deps'
-            sh "./deployments/cluster-installer.sh || exit 0"
+            sh "./deployments/installer.sh || exit 0"
             }
         }
 
@@ -69,13 +69,13 @@ pipeline {
             sh 'minikube ip'
             sh 'kubectl cluster-info'
             dir('deployments') {
-              sh 'kubectl delete namespace prodxcloud-nodejs-express-service-1'
-              sh 'kubectl create namespace prodxcloud-nodejs-express-service-1'
-              sh 'kubectl config set-context --current --namespace=prodxcloud-nodejs-express-service-1'
+              sh 'kubectl delete namespace reactprodx'
+              sh 'kubectl create namespace reactprodx'
+              sh 'kubectl config set-context --current --namespace=reactprodx'
               sh 'kubectl apply -f deployment.yaml'
             }    
             sh 'kubectl get services && kubectl get pods'
-            sh 'minikube service prodxcloud-nodejs-express-service-1 -n  prodxcloud-nodejs-express-service-1 &'
+            sh 'minikube service reactprodx -n  reactprodx &'
             sh 'exit 0'
       }
     }
