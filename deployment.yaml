@@ -42,7 +42,7 @@ spec:
   externalIPs:
   - 139.162.39.79
   ports:
-  - port: 3001
+  - port: 8080
     protocol: TCP
     targetPort: 80
     nodePort: 31000

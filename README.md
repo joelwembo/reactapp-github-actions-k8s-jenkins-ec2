@@ -145,7 +145,7 @@ Requirement
 8. kubectl apply -f load-balancer.yaml
 9. kubectl get services -w
 9. minikube deployment
-     - minikube service reactprodx -n  reactprodx
+     - minikube service reactprodx -n reactprodx
     
 
 NAMESPACE  |    NAME    | TARGET PORT |            URL            |
@@ -171,8 +171,17 @@ docker run -d -p 5000:5000 --name reactwebapp1 joelwembo/reactprodx
 
 # Prometheus
 
+Prometheus (metrics database) http://<host-ip>:9090
+Prometheus-Pushgateway (push acceptor for ephemeral and batch jobs) http://<host-ip>:9091
+AlertManager (alerts management) http://<host-ip>:9093
+NodeExporter (host metrics collector)
+cAdvisor (containers metrics collector)
+Caddy (reverse proxy and basic auth provider for prometheus and alertmanager)
+
 
 # Grafana
+
+Grafana (visualize metrics) http://<host-ip>:3000
 
 
 # Elastic Search
