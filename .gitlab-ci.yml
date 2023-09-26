@@ -1,0 +1,72 @@
+stages:
+  - linting
+  - test
+  - build
+  - integration
+  - deploy
+
+workflow:
+  rules:
+    # don't create a pipeline if it's a commit pipeline, on a branch and that branch has open merge requests.
+    - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
+
+    # Tag docker images with latest
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+      variables:
+        DOCKER_IMAGE_TAG: "latest"
+
+    # Tag docker images with a slug of the branch name
+    - if: $CI_COMMIT_REF_NAME != $CI_DEFAULT_BRANCH
+      variables:
+        DOCKER_IMAGE_TAG: "$CI_COMMIT_REF_SLUG"
+
+default:
+  interruptible: true
+  image: node:lts-slim
+  before_script:
+    - node --version
+    - npm ci
+
+linting:
+  stage:  linting
+  script:
+    - npm run lint
+
+unit_test:
+  stage: test
+  script:
+    - npm run test
+
+build_static_files:
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - build
+    expire_in: "1w"
+
+# build_docker_image:
+#   stage: build
+#   image: docker:20-cli
+#   needs: [build_static_files]
+#   services:
+#     - docker:20-dind
+#   before_script:
+#     - docker --version
+#     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+#   script:
+#     - docker build --pull -t "$CI_REGISTRY_IMAGE:$DOCKER_IMAGE_TAG" .
+#     - docker push "$CI_REGISTRY_IMAGE:$DOCKER_IMAGE_TAG"
+
+# deploy_to_test:
+#   stage: deploy
+#   image: docker:20-cli
+#   interruptible: false
+#   services:
+#     - docker:20-dind
+#   before_script:
+#     - docker --version
+#   script:
+#     # TODO: copy code from docker-deploy repo
+#     - docker --version
