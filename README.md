@@ -31,6 +31,7 @@ View the demo at https://mui.com/material-ui/getting-started/templates/dashboard
 
 
 # Using docker
+
 1. DOCKER_SCAN_SUGGEST=false docker build -t reactprodx .
 
 For building an image to be push to dockerhub
@@ -76,19 +77,19 @@ Step 1
 
 
 # Jenkins installations
-sudo apt-get install debian-keyring debian-archive-keyring --assume-yes
-sudo apt-key update
-sudo apt-get update
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5BA31D57EF5975CA
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
-sudo apt update
-sudo apt install openjdk-11-jre-headless --assume-yes
-sudo java -version
-curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
-echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
-sudo apt-get update
-sudo apt-get install jenkins --assume-yes
+- sudo apt-get install debian-keyring debian-archive-keyring --assume-yes
+- sudo apt-key update
+- sudo apt-get update
+- sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5
+- sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5BA31D57EF5975CA
+- sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
+- sudo apt update
+- sudo apt install openjdk-11-jre-headless --assume-yes
+- sudo java -version
+- curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+- echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+- sudo apt-get update
+- sudo apt-get install jenkins --assume-yes
 
 - Step 1
 First open the /etc/default/jenkins file.
@@ -179,7 +180,6 @@ docker run -d -p 5000:5000 --name reactwebapp1 joelwembo/reactprodx
 
 # Vagrant
 
-
 # Prometheus
 
 Prometheus (metrics database) http://<host-ip>:9090
@@ -189,11 +189,9 @@ NodeExporter (host metrics collector)
 cAdvisor (containers metrics collector)
 Caddy (reverse proxy and basic auth provider for prometheus and alertmanager)
 
-
 # Grafana
 
 Grafana (visualize metrics) http://<host-ip>:3000
-
 
 # Elastic Search
 
