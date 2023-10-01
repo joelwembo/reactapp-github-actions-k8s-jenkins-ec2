@@ -60,7 +60,7 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Kubernetes') {
           steps {
             sh 'minikube ip'
             sh 'kubectl cluster-info'
