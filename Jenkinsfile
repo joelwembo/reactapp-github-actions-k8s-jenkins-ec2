@@ -66,9 +66,9 @@ pipeline {
           steps {
             sh 'wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64'
             sh 'cp minikube-linux-amd64 /usr/local/bin/minikube'
-            sh 'chmod +x /usr/local/bin/minikube'
-            sh 'minikube start --driver=docker --force'
-            sh 'minikube ip'
+            sh 'sudo chmod +x /usr/local/bin/minikube'
+            sh 'sudo minikube start --driver=docker --force'
+            sh 'sudo minikube ip'
             // sh 'kubectl cluster-info'
             // dir('deployments') {
             //   sh 'kubectl delete namespace reactprodx'
