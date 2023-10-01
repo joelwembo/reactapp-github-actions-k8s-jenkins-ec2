@@ -1,8 +1,19 @@
 # Deploying react to kubernetes / aws ec2 using Jenkins
-npm install
-npm start
 
-# Dashboard template
+![image](https://github.com/joelwembo/reactprodx-k8s-jenkins/assets/19718580/7a3f2005-6d9c-4f42-b138-12bbb01e3f5e)
+
+# Tools
+
+- NodeJS
+- React
+- Jenkins
+- Kubernetes
+- Docker
+- Docker Compose
+- AWS EC2 / Digital Ocean
+- Github Actions
+- Vagrant
+- ArgoCD
 
 ## Usage
 
