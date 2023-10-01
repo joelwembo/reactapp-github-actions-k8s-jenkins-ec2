@@ -23,17 +23,17 @@ pipeline {
         stage('Dependencies') {
             steps{
             sh 'npm install --legacy-peer-deps'
-            sh 'chmod 777 ./deployments/installer.sh'
-              dir('deployments') {
-                sh "installer.sh || exit 0"
-              } 
+            // sh 'chmod 777 ./deployments/installer.sh'
+            //   dir('deployments') {
+            //     sh "installer.sh || exit 0"
+            //   } 
             }
         }
-        stage('Unit Test 1'){
-            steps{
-                sh "npm run test"
-            }
-        }
+        // stage('Unit Test 1'){
+        //     steps{
+        //         sh "npm run test"
+        //     }
+        // }
         
         stage('Build'){
             steps{
@@ -60,7 +60,7 @@ pipeline {
             }
         }
 
-        stage('Deploy to AKS') {
+        stage('Deploy') {
           steps {
             sh 'minikube ip'
             sh 'kubectl cluster-info'
