@@ -1,7 +1,7 @@
 pipeline {
     agent any
     options {
-        buildDiscarder(logRotator(numToKeepStr: '5'))
+        buildDiscarder(logRotator(numToKeepStr: '3'))
       }
       environment {
         DOCKERHUB_CREDENTIALS = credentials('globaldockerhub')
@@ -41,12 +41,14 @@ pipeline {
                 sh 'docker build -t joelwembo/reactprodx:latest  --no-cache .'
             }
         }
-         stage('Login') {
+        
+        stage('Login') {
           steps {
             sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
           }
         }
-        stage('Push') {
+
+        stage('Docker Push') {
           steps {
             sh 'docker push joelwembo/reactprodx:latest'
           }
@@ -75,13 +77,6 @@ pipeline {
             sh 'exit 0'
       }
     }
-
-        // stage('SendEmail'){
-        //     steps{
-        //         emailext(attachLog: true, body: 'HelloEmIl body', subject: 'This is Nodejs Test subject', to: 'joelwembo@outlook.ph')      
-        //     }
-        // }
-
      
     }
 }
