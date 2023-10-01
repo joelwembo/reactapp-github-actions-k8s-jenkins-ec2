@@ -76,22 +76,22 @@ jobs:
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/master' }}
 
-  update-manifest-stage:
-    runs-on: ubuntu-latest
-    needs: ['build-and-push-docker-image']
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          repository: joelwembo/reactprodx:${{ github.sha }}
-          ref: 'master'
-          token: ${{ secrets.G_TOKEN }}
-      - name: setup git config
-        run: |
-          git config --global user.email "joelotepawembo@gmail.com"
-          git config --global user.name "joelwembo"
-          echo ${{ github.sha }}
-          sed -i "s#${{ github.actor }}.*#${{ github.actor }}/gitops01:${{ github.sha }}#g" deployment.yaml
-          git add -A
-          git commit -am "Update image for - ${{ github.sha }}"
-      - run: echo ${{ github }}
-      - run: git push origin master
+  # update-manifest-stage:
+  #   runs-on: ubuntu-latest
+  #   needs: ['build-and-push-docker-image']
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         repository: joelwembo/reactprodx:${{ github.sha }}
+  #         ref: 'master'
+  #         token: ${{ secrets.G_TOKEN }}
+  #     - name: setup git config
+  #       run: |
+  #         git config --global user.email "joelotepawembo@gmail.com"
+  #         git config --global user.name "joelwembo"
+  #         echo ${{ github.sha }}
+  #         sed -i "s#${{ github.actor }}.*#${{ github.actor }}/gitops01:${{ github.sha }}#g" deployment.yaml
+  #         git add -A
+  #         git commit -am "Update image for - ${{ github.sha }}"
+  #     - run: echo ${{ github }}
+  #     - run: git push origin master
