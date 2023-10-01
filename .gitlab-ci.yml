@@ -1,50 +1,35 @@
 stages:
-  - linting
-  - test
-  - build
-  - integration
   - deploy
 
-workflow:
-  rules:
-    # don't create a pipeline if it's a commit pipeline, on a branch and that branch has open merge requests.
-    - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
-      when: never
-
-    # Tag docker images with latest
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
-      variables:
-        DOCKER_IMAGE_TAG: "latest"
-
-    # Tag docker images with a slug of the branch name
-    - if: $CI_COMMIT_REF_NAME != $CI_DEFAULT_BRANCH
-      variables:
-        DOCKER_IMAGE_TAG: "$CI_COMMIT_REF_SLUG"
-
-default:
-  interruptible: true
-  image: node:lts-slim
-  before_script:
-    - node --version
-    - npm ci
-
-linting:
-  stage:  linting
+deploy-dev:
+  image: docker:19.03.5
+  stage: deploy
+  environment:
+    name: dev
   script:
-    - npm run lint
+    - apk add --no-cache git curl bash
+    - curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v2.0.3/argocd-linux-amd64
+    - chmod +x /usr/local/bin/argocd
+    - curl -LO https://dl.k8s.io/release/v1.18.14/bin/linux/amd64/kubectl
+    - install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+    - kubectl version --client
+    - kubectl config set-cluster k8s --server="${MY_CLUSTER_URL}"
+    - kubectl config set clusters.k8s.certificate-authority-data "${SERVICE_USER_CERTIFICATE}"
+    - kubectl config set-credentials gitlab --token="${SERVICE_USER_TOKEN}"
+    - kubectl config set-context ${CONTEXT_NAME} --cluster=k8s --user=gitlab
+    - kubectl config use-context ${CONTEXT_NAME}
+    - kubectl port-forward svc/argocd-server -n argocd 8080:443 2>&1 >/dev/null &
+    - sleep 2s
+    - argocd login localhost:8080 --username ${ARGOCD_USERNAME} --password ${ARGOCD_PASSWORD} --insecure
+    - argocd app set argo-multi-container-app-k8s -p ports.client=3000
+    - argocd app set argo-multi-container-app-k8s -p ports.server=5000
+    - argocd app set argo-multi-container-app-k8s -p ports.postgres=5432
+    - argocd app sync argo-multi-container-app-k8s
+  when: manual
+  tags:
+    - gitlab-org
 
-unit_test:
-  stage: test
-  script:
-    - npm run test
 
-build_static_files:
-  script:
-    - npm run build
-  artifacts:
-    paths:
-      - build
-    expire_in: "1w"
 
 # build_docker_image:
 #   stage: build
