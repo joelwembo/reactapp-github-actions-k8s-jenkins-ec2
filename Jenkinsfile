@@ -6,7 +6,6 @@ pipeline {
       environment {
         DOCKERHUB_CREDENTIALS = credentials('globaldockerhub')
       }
-
     tools { nodejs "NodeJS"}  
     stages{
          stage('Environment') {
@@ -24,17 +23,17 @@ pipeline {
         stage('Dependencies') {
             steps{
             sh 'npm install --legacy-peer-deps'
-            // sh 'chmod 777 ./deployments/installer.sh'
-            //   dir('deployments') {
-            //     sh "installer.sh || exit 0"
-            //   } 
+            sh 'chmod 777 ./deployments/installer.sh'
+              dir('deployments') {
+                sh "installer.sh || exit 0"
+              } 
             }
         }
-        // stage('Unit Test 1'){
-        //     steps{
-        //         sh "npm run test"
-        //     }
-        // }
+        stage('Unit Test 1'){
+            steps{
+                sh "npm run test"
+            }
+        }
         
         stage('Build'){
             steps{
@@ -52,11 +51,6 @@ pipeline {
             sh 'docker push joelwembo/reactprodx:latest'
           }
         }
-        // stage('Manuel Test'){
-        //     steps{
-        //         sh "npm run test"
-        //     }
-        // }
         stage('Deploy'){
             steps{
                 sh "docker-compose down"
@@ -66,21 +60,21 @@ pipeline {
             }
         }
 
-    //     stage('Deploy to AKS') {
-    //       steps {
-    //         sh 'minikube ip'
-    //         sh 'kubectl cluster-info'
-    //         dir('deployments') {
-    //           sh 'kubectl delete namespace reactprodx'
-    //           sh 'kubectl create namespace reactprodx'
-    //           sh 'kubectl config set-context --current --namespace=reactprodx'
-    //           sh 'kubectl apply -f deployment.yaml'
-    //         }    
-    //         sh 'kubectl get services && kubectl get pods'
-    //         sh 'minikube service reactprodx -n  reactprodx &'
-    //         sh 'exit 0'
-    //   }
-    // }
+        stage('Deploy to AKS') {
+          steps {
+            sh 'minikube ip'
+            sh 'kubectl cluster-info'
+            dir('deployments') {
+              sh 'kubectl delete namespace reactprodx'
+              sh 'kubectl create namespace reactprodx'
+              sh 'kubectl config set-context --current --namespace=reactprodx'
+              sh 'kubectl apply -f deployment.yaml'
+            }    
+            sh 'kubectl get services && kubectl get pods'
+            sh 'minikube service reactprodx -n  reactprodx &'
+            sh 'exit 0'
+      }
+    }
 
         // stage('SendEmail'){
         //     steps{
