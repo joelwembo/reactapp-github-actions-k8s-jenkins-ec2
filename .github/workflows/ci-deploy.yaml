@@ -87,8 +87,8 @@
   #         token: ${{ secrets.G_TOKEN }}
   #     - name: setup git config
   #       run: |
-  #         git config --global user.email "joelotepawembo@gmail.com"
-  #         git config --global user.name "joelwembo"
+  #         git config --global user.email ""
+  #         git config --global user.name ""
   #         echo ${{ github.sha }}
   #         sed -i "s#${{ github.actor }}.*#${{ github.actor }}/gitops01:${{ github.sha }}#g" deployment.yaml
   #         git add -A
