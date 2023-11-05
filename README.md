@@ -35,7 +35,7 @@ View the demo at https://mui.com/material-ui/getting-started/templates/dashboard
 1. DOCKER_SCAN_SUGGEST=false docker build -t reactprodx .
 
 For building an image to be push to dockerhub
-DOCKER_SCAN_SUGGEST=false docker build -t joelwembo/reactprodx:latest .
+DOCKER_SCAN_SUGGEST=false docker build -t joelwembo/reactapp:latest .
 
 push docker image to dockerhub
 
