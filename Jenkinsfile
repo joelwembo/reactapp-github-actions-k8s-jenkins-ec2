@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Code'){
             steps{
-                git url: 'https://github.com/joelwembo/reactprodx-k8s-jenkins.git' 
+                git url: 'https://github.com/joelwembo/reactprodx-k8s-jenkins.git' , branch : 'main'
             }
         }
         stage('Dependencies') {
