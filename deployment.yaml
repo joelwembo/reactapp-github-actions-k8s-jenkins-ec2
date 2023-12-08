@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: reactprodx
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: reactprodx
@@ -16,7 +16,7 @@ spec:
       containers:
       - name: reactprodx
         image: joelwembo/reactprodx:latest
-        # imagePullPolicy: Always
+        imagePullPolicy: Always
         ports:
           - containerPort: 80
         # readinessProbe:
@@ -39,8 +39,8 @@ kind: Service
 metadata:  
   name: reactprodx
 spec:
-  externalIPs:
-  - 139.162.39.79
+  # externalIPs:
+  # - 0.0.0.0
   ports:
   - port: 8080
     protocol: TCP
