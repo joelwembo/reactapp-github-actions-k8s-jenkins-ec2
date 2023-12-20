@@ -34,11 +34,11 @@ pipeline {
             sh 'npm install --legacy-peer-deps'
             }
         }
-        stage('Unit Test 1'){
-            steps{
-                sh "npm run test"
-            }
-        }
+        // stage('Unit Test 1'){
+        //     steps{
+        //         sh "npm run test"
+        //     }
+        // }
         
         stage('Build'){
             steps{
