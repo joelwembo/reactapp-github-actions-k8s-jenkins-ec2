@@ -32,22 +32,23 @@ spec:
             requests:
               cpu: 300m
               memory: 200Mi  
----
+              
 # Load Balancer
+--- 
 apiVersion: v1
 kind: Service
-metadata:  
-  name: reactprodx
+metadata:
+  name: load-balancer
+  labels:
+    app: reactprodx
 spec:
   externalIPs:
    - 20.2.221.52
-ports:
-  - port: 8080
-    protocol: TCP
+  type: LoadBalancer
+  ports:
+  - port: 80
     targetPort: 80
-    nodePort: 31000
-selector:
-    app: reactprodx
-type: LoadBalancer
-status:
-  loadBalancer: {}              
+    protocol: TCP
+    nodePort: 31009
+  selector:
+    app: reactprodx        
