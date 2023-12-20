@@ -172,7 +172,7 @@ NAMESPACE  |    NAME    | TARGET PORT |          URL           |
 11. Check Services and running pods
    - kubectl get pods
    - kubectl get nodes
-   - 
+   - kubectl describe pod reactprodx-6f547c9f6b-zvlrc
 
 # Important Commands
 minikube ip
