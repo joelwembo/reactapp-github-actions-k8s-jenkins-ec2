@@ -6,15 +6,15 @@ pipeline {
       environment {
         DOCKERHUB_CREDENTIALS = credentials('globaldockerhub')
         appName = "reactfr"
-        registry = ""
-        registryCredential = ""
-        projectPath = ""
-        AWS_ACCESS_KEY_ID = ocredentials('your_aws_access_key_id')
-        AWS_SECRET_ACCESS_KEY = credentials('your_aws_secret_access_key')
-        AWS_REGION = 'your_aws_region'
-        EC2_INSTANCE = 'your_ec2_instance_id'
-        SSH_KEY = credentials('your_ssh_key')
-      }
+      //   registry = ""
+      //   registryCredential = ""
+      //   projectPath = ""
+      //   AWS_ACCESS_KEY_ID = ocredentials('your_aws_access_key_id')
+      //   AWS_SECRET_ACCESS_KEY = credentials('your_aws_secret_access_key')
+      //   AWS_REGION = 'your_aws_region'
+      //   EC2_INSTANCE = 'your_ec2_instance_id'
+      //   SSH_KEY = credentials('your_ssh_key')
+      // }
     tools { nodejs "NodeJS"}  
     stages{
          stage('Environment') {
