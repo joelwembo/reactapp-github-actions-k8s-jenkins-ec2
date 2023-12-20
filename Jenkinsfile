@@ -5,6 +5,15 @@ pipeline {
       }
       environment {
         DOCKERHUB_CREDENTIALS = credentials('globaldockerhub')
+        appName = "reactfr"
+        registry = ""
+        registryCredential = ""
+        projectPath = ""
+        AWS_ACCESS_KEY_ID = ocredentials('your_aws_access_key_id')
+        AWS_SECRET_ACCESS_KEY = credentials('your_aws_secret_access_key')
+        AWS_REGION = 'your_aws_region'
+        EC2_INSTANCE = 'your_ec2_instance_id'
+        SSH_KEY = credentials('your_ssh_key')
       }
     tools { nodejs "NodeJS"}  
     stages{
@@ -25,11 +34,11 @@ pipeline {
             sh 'npm install --legacy-peer-deps'
             }
         }
-        // stage('Unit Test 1'){
-        //     steps{
-        //         sh "npm run test"
-        //     }
-        // }
+        stage('Unit Test 1'){
+            steps{
+                sh "npm run test"
+            }
+        }
         
         stage('Build'){
             steps{
@@ -76,6 +85,39 @@ pipeline {
       //       // sh 'minikube service reactprodx -n  reactprodx &'
       //       sh 'exit 0'
       // }
+      stage('Deploy to AWS') {
+            steps {
+                 dir('deployments') {
+                    sh "pwd"
+                    sh "chmod +x -R ./deploy-aws-ec2.sh"
+                    sh 'docker images --filter "reference=cloudapp-django-web*"' 
+                    sh './deploy-aws-ec2.sh'
+                 }
+              
+            }
+        } 
     }   
+
+    post {
+            success {
+                script {
+                    currentBuild.result = 'SUCCESS'
+                    slackSend(color: 'good', message: "Deployment successful! :tada:", channel: "#DEV")
+                    emailext subject: 'Deployment Successful',
+                            body: 'Deployment was successful!',
+                            recipientProviders: [[$class: 'CulpritsRecipientProvider']]
+                }
+            }
+            failure {
+                script {
+                    currentBuild.result = 'FAILURE'
+                    slackSend(color: 'danger', message: "Deployment failed. :x:", channel: "#DEV")
+                    emailext subject: 'Deployment Failed',
+                            body: 'Deployment failed!',
+                            recipientProviders: [[$class: 'CulpritsRecipientProvider']]
+                }
+            }
+
+        }
     
 }

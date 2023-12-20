@@ -2,7 +2,7 @@ version: "3.9"
 services:
     webreactprodx:
         container_name: reactprodx
-        image: joelwembo/reactprodxt:latest
+        image: joelwembo/reactprodx:latest
         restart: always
         build:
             context: .

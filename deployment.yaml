@@ -19,12 +19,12 @@ spec:
         imagePullPolicy: Always
         ports:
           - containerPort: 80
-        # readinessProbe:
-        #   httpGet:
-        #     path: /
-        #     port: 80
-        #   initialDelaySeconds: 10
-        #   periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
         resources:
             limits:
               memory: 200Mi
@@ -39,15 +39,15 @@ kind: Service
 metadata:  
   name: reactprodx
 spec:
-  # externalIPs:
-  # - 0.0.0.0
-  ports:
+  externalIPs:
+   - 20.2.221.52
+ports:
   - port: 8080
     protocol: TCP
     targetPort: 80
     nodePort: 31000
-  selector:
+selector:
     app: reactprodx
-  type: LoadBalancer
+type: LoadBalancer
 status:
   loadBalancer: {}              
