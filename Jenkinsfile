@@ -14,7 +14,7 @@ pipeline {
       //   AWS_REGION = 'your_aws_region'
       //   EC2_INSTANCE = 'your_ec2_instance_id'
       //   SSH_KEY = credentials('your_ssh_key')
-      // }
+      }
     tools { nodejs "NodeJS"}  
     stages{
          stage('Environment') {
