@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Code'){
             steps{
-                git url: 'https://github.com/joelwembo/reactprodx-k8s-jenkins.git' , branch : 'main'
+                git url: 'https://github.com/joelwembo/reactapp-github-actions-k8s-jenkins-ec2.git' , branch : 'master'
             }
         }
         stage('Dependencies') {
@@ -90,7 +90,7 @@ pipeline {
                  dir('deployments') {
                     sh "pwd"
                     sh "chmod +x -R ./deploy-aws-ec2.sh"
-                    sh 'docker images --filter "reference=cloudapp-django-web*"' 
+                    sh 'docker images --filter "reference=reactprodx*"' 
                     sh './deploy-aws-ec2.sh'
                  }
               
