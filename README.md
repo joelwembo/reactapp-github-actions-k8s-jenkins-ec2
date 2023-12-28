@@ -180,6 +180,8 @@ docker run -d -p 5000:5000 --name reactwebapp1 joelwembo/reactprodx
 
 # Vagrant
 
+
+
 # Prometheus
 
 Prometheus (metrics database) http://<host-ip>:9090
@@ -196,4 +198,5 @@ Grafana (visualize metrics) http://<host-ip>:3000
 # Elastic Search
 
 # Slack / Jira Connection
+
 
