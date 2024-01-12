@@ -84,6 +84,7 @@ pipeline {
             // sh 'kubectl get services && kubectl get pods'
             // sh 'minikube service reactprodx -n  reactprodx &'
             sh 'exit 0'
+          }
       }
       stage('Deploy to AWS') {
             steps {
