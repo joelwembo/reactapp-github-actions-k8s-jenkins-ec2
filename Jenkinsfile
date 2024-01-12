@@ -67,32 +67,33 @@ pipeline {
             }
         }
 
-        stage('Kubernetes') {
-          steps {
-            sh 'minikube ip'
-            sh 'kubectl cluster-info'
-            dir('deployments') {
-              sh 'kubectl delete namespace reactprodx'
-              sh 'kubectl create namespace reactprodx'
-              sh 'kubectl config set-context --current --namespace=reactprodx'
-              sh 'kubectl apply -f deployment.yaml'
-            }    
-            sh 'kubectl get services && kubectl get pods'
-            sh 'minikube service reactprodx -n  reactprodx &'
-            sh 'exit 0'
-          }
-      }
-      stage('Deploy to AWS') {
-            steps {
-                 dir('deployments') {
-                    sh "pwd"
-                    sh "chmod +x -R ./deploy-aws-ec2.sh"
-                    sh 'docker images --filter "reference=reactprodx*"' 
-                    sh './deploy-aws-ec2.sh'
-                 }
+      //   stage('Kubernetes') {
+      //     steps {
+      //       sh 'sudo minikube start --driver=docker --force'
+      //       sh 'sudo minikube ip'
+      //       sh 'kubectl cluster-info'
+      //       dir('deployments') {
+      //         sh 'kubectl delete namespace reactprodx'
+      //         sh 'kubectl create namespace reactprodx'
+      //         sh 'kubectl config set-context --current --namespace=reactprodx'
+      //         sh 'kubectl apply -f deployment.yaml'
+      //       }    
+      //       sh 'kubectl get services && kubectl get pods'
+      //       sh 'minikube service reactprodx -n  reactprodx &'
+      //       sh 'exit 0'
+      //     }
+      // }
+      // stage('Deploy to AWS') {
+      //       steps {
+      //            dir('deployments') {
+      //               sh "pwd"
+      //               sh "chmod +x -R ./deploy-aws-ec2.sh"
+      //               sh 'docker images --filter "reference=reactprodx*"' 
+      //               sh './deploy-aws-ec2.sh'
+      //            }
               
-            }
-        } 
+      //       }
+      //   } 
     }   
 
     // post {
