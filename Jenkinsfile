@@ -67,24 +67,24 @@ pipeline {
             }
         }
 
-      //   stage('Kubernetes') {
-      //     steps {
-      //       sh 'wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64'
-      //       sh 'cp minikube-linux-amd64 /usr/local/bin/minikube'
-      //       sh 'sudo chmod +x /usr/local/bin/minikube'
-      //       sh 'sudo minikube start --driver=docker --force'
-      //       sh 'sudo minikube ip'
-      //       // sh 'kubectl cluster-info'
-      //       // dir('deployments') {
-      //       //   sh 'kubectl delete namespace reactprodx'
-      //       //   sh 'kubectl create namespace reactprodx'
-      //       //   sh 'kubectl config set-context --current --namespace=reactprodx'
-      //       //   sh 'kubectl apply -f deployment.yaml'
-      //       // }    
-      //       // sh 'kubectl get services && kubectl get pods'
-      //       // sh 'minikube service reactprodx -n  reactprodx &'
-      //       sh 'exit 0'
-      // }
+        stage('Kubernetes') {
+          steps {
+            sh 'wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64'
+            sh 'cp minikube-linux-amd64 /usr/local/bin/minikube'
+            sh 'sudo chmod +x /usr/local/bin/minikube'
+            sh 'sudo minikube start --driver=docker --force'
+            sh 'sudo minikube ip'
+            // sh 'kubectl cluster-info'
+            // dir('deployments') {
+            //   sh 'kubectl delete namespace reactprodx'
+            //   sh 'kubectl create namespace reactprodx'
+            //   sh 'kubectl config set-context --current --namespace=reactprodx'
+            //   sh 'kubectl apply -f deployment.yaml'
+            // }    
+            // sh 'kubectl get services && kubectl get pods'
+            // sh 'minikube service reactprodx -n  reactprodx &'
+            sh 'exit 0'
+      }
       stage('Deploy to AWS') {
             steps {
                  dir('deployments') {
