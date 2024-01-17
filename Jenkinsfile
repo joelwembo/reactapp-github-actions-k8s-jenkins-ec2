@@ -42,7 +42,7 @@ pipeline {
         
         stage('Build'){
             steps{
-                sh 'docker-compose down'
+                sh 'sudo chmod 777 /var/run/docker.sock'
                 sh 'docker build -t joelwembo/reactprodx:latest  --no-cache .'
             }
         }
