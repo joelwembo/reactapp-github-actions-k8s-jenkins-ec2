@@ -24,7 +24,7 @@ pipeline {
             sh 'node -v'
           }
         }
-        
+
         stage('Code'){
             steps{
                 git url: 'https://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@github.com/joelwembo/reactapp-github-actions-k8s-jenkins-ec2.git'
@@ -43,7 +43,7 @@ pipeline {
         
         stage('Build'){
             steps{
-                sh 'sudo chmod 777 /var/run/docker.sock'
+                // sh 'sudo chmod 777 /var/run/docker.sock'
                 sh 'docker build -t joelwembo/reactprodx:latest  --no-cache .'
             }
         }
