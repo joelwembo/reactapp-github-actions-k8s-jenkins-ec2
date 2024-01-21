@@ -27,7 +27,7 @@ pipeline {
 
         stage('Code'){
             steps{
-                git url: 'https://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@github.com/joelwembo/reactapp-github-actions-k8s-jenkins-ec2.git'
+                git url: 'https://token@github.com/joelwembo/reactapp-github-actions-k8s-jenkins-ec2.git'
             }
         }
         stage('Dependencies') {
